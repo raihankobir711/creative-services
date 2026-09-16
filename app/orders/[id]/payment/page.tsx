@@ -9,31 +9,32 @@ const paymentMethods = [
     id: "bkash",
     name: "bKash",
     details: "Send Money",
-    account: "YOUR_BKASH_NUMBER",
+    account: "01749151451",
   },
   {
     id: "nagad",
     name: "Nagad",
     details: "Send Money",
-    account: "YOUR_NAGAD_NUMBER",
+    account: "01749151451",
   },
   {
     id: "rocket",
     name: "Rocket",
     details: "Send Money",
-    account: "YOUR_ROCKET_NUMBER",
+    account: "01647414260",
   },
   {
     id: "bank_transfer",
     name: "Bank Transfer",
-    details: "Bank Account",
-    account: "YOUR_BANK_ACCOUNT_DETAILS",
+    details: "Dutch-Bangla Bank Ltd",
+    account:
+      "Raihan\nA/C: 2071050038813\nBranch: Naogaon\nRouting: 090641187\nSWIFT: DBBLBDDH",
   },
   {
     id: "skrill",
     name: "Skrill",
-    details: "International",
-    account: "YOUR_SKRILL_EMAIL",
+    details: "International Payment (Skrill Account)",
+    account: "black711box@gmail.com",
   },
 ];
 
