@@ -415,7 +415,14 @@ export default function OrderDetailsPage() {
                     {order.packages?.revisions || "-"}
                   </p>
                 </div>
-
+                <div className="mt-6 flex justify-end">
+  <a
+    href={`/orders/${order.id}/payment`}
+    className="rounded-xl bg-red-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-black"
+  >
+    Pay Now →
+  </a>
+</div>
               </div>
             </section>
 
