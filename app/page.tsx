@@ -6,7 +6,9 @@ import { supabase } from "./lib/supabase";
 export default function Home() {
   const [services, setServices] = useState<any[]>([]);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [profilePhoto, setProfilePhoto] = useState("/admin-photo.jpg");
+  const [profilePhoto, setProfilePhoto] = useState(
+  "https://qgrhmsoobopqdunlhrau.supabase.co/storage/v1/object/public/profile-photos/7d8e1914-19b9-4569-8ccb-f019829ef317/1789491327270-WhatsApp_Image_2026-09-15_at_10.54.09_PM.jpeg"
+);
 
   useEffect(() => {
     const loadServices = async () => {
