@@ -19,6 +19,7 @@ export default function OrderDetailsPage() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   const [loading, setLoading] = useState(true);
+  const [paymentVerified, setPaymentVerified] = useState(false);
   const [sendingMessage, setSendingMessage] = useState(false);
   const [sendingRevision, setSendingRevision] = useState(false);
   const [uploadingFile, setUploadingFile] = useState(false);
@@ -56,6 +57,15 @@ export default function OrderDetailsPage() {
     }
 
     setOrder(orderData);
+    const { data: paymentData } = await supabase
+  .from("payments")
+  .select("status")
+  .eq("order_id", params.id)
+  .eq("user_id", user.id)
+  .eq("status", "verified")
+  .maybeSingle();
+
+setPaymentVerified(!!paymentData);
 
     const { data: messageData } = await supabase
       .from("messages")
@@ -415,14 +425,7 @@ export default function OrderDetailsPage() {
                     {order.packages?.revisions || "-"}
                   </p>
                 </div>
-                <div className="mt-6 flex justify-end">
-  <a
-    href={`/orders/${order.id}/payment`}
-    className="rounded-xl bg-red-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-black"
-  >
-    Pay Now →
-  </a>
-</div>
+
               </div>
             </section>
 
@@ -751,21 +754,32 @@ className={`max-w-[80%] rounded-2xl px-5 py-4 ${
 
                       </div>
 
-                      <a
-                        href={file.file_url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="shrink-0 rounded-xl border bg-white px-4 py-2.5 text-center text-sm font-semibold text-gray-800 transition hover:border-black hover:bg-black hover:text-white"
-                      >
-                        Download
-                      </a>
+                      {paymentVerified && (
+  <a
+    href={file.file_url}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="shrink-0 rounded-xl border bg-white px-4 py-2.5 text-center text-sm font-semibold text-gray-900 transition hover:bg-black hover:text-white"
+  >
+    Download
+  </a>
+)}
 
                     </div>
                   ))
                 )}
 
               </div>
-
+{!paymentVerified && (
+  <div className="mt-6 flex justify-end">
+    <button
+      onClick={() => router.push(`/orders/${params.id}/payment`)}
+      className="rounded-xl bg-red-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-black"
+    >
+      Pay Now →
+    </button>
+  </div>
+)}
             </section>
 
           </div>
